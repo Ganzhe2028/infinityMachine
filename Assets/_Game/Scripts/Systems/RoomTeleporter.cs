@@ -41,7 +41,7 @@ public class RoomTeleporter : MonoBehaviour
         if(controller != null) controller.enabled = false;
 
         // 2. 等待一点时间 (假装在加载/叙事)
-        yield return new WaitForSeconds(1.0f); // 1秒黑屏
+        yield return new WaitForSeconds(0f); // 自定义秒数黑屏
 
         // 3. 瞬移主角
         // 注意：CharacterController 瞬移需要特殊处理，直接改 transform.position 可能会无效
@@ -62,7 +62,7 @@ public class RoomTeleporter : MonoBehaviour
         // 5. 恢复
         if(controller != null) controller.enabled = true;
         
-        yield return new WaitForSeconds(0.5f); // 再黑屏一会儿让玩家反应
+        yield return new WaitForSeconds(0f); // 再自定义秒数黑屏一会儿让玩家反应
 
         if (transitionCanvas != null) transitionCanvas.SetActive(false);
         isTransporting = false;
