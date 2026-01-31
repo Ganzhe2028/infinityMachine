@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     private CharacterController _controller;
     private Camera _mainCamera;
+    private Animator _animator;
     
     // Gravity
     private float _verticalVelocity;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         _controller = GetComponent<CharacterController>();
         _mainCamera = Camera.main;
+        _animator = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -44,6 +46,12 @@ public class PlayerController : MonoBehaviour
         // Final movement
         Vector3 finalMove = move * moveSpeed + Vector3.up * _verticalVelocity;
         _controller.Move(finalMove * Time.deltaTime);
+        
+        // Animation: set speed parameter (0 = idle, >0 = walk)
+        if (_animator != null)
+        {
+            _animator.SetFloat("speed", move.magnitude);
+        }
     }
 
     // Handle face-mouse rotation (Top-Down essential)
