@@ -9,10 +9,6 @@
 | Single test | `& $UNITY ... -testFilter "ClassName.TestName"` |
 | Format | `dotnet format infinityMachine.sln` |
 
-```powershell
-$UNITY = "C:\Program Files\Unity\Hub\Editor\6000.0.0f1\Editor\Unity.exe"
-```
-
 ## Build & Test Commands
 
 ```powershell
