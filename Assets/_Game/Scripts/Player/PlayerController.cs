@@ -19,6 +19,11 @@ public class PlayerController : MonoBehaviour
         _controller = GetComponent<CharacterController>();
         _mainCamera = Camera.main;
         _animator = GetComponentInChildren<Animator>();
+        
+        if (_animator == null)
+            Debug.LogError("[PlayerController] Animator not found in children!");
+        else
+            Debug.Log("[PlayerController] Animator found: " + _animator.gameObject.name);
     }
 
     void Update()
@@ -47,10 +52,12 @@ public class PlayerController : MonoBehaviour
         Vector3 finalMove = move * moveSpeed + Vector3.up * _verticalVelocity;
         _controller.Move(finalMove * Time.deltaTime);
         
-        // Animation: set speed parameter (0 = idle, >0 = walk)
+        // Animation: set speed parameter (0 = idle, 0.2 = walk)
         if (_animator != null)
         {
-            _animator.SetFloat("speed", move.magnitude);
+            bool isMoving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || 
+                            Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
+            _animator.SetFloat("speed", isMoving ? 0.2f : 0f);
         }
     }
 
