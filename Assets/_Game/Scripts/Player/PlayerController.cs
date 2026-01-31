@@ -52,12 +52,16 @@ public class PlayerController : MonoBehaviour
         Vector3 finalMove = move * moveSpeed + Vector3.up * _verticalVelocity;
         _controller.Move(finalMove * Time.deltaTime);
         
-        // Animation: set speed parameter (0 = idle, 0.2 = walk)
+        // Animation: set speed parameter (0.2 = forward, -0.1 = backward, 0 = idle)
         if (_animator != null)
         {
-            bool isMoving = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || 
-                            Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D);
-            _animator.SetFloat("speed", isMoving ? 0.2f : 0f);
+            float animSpeed = 0f;
+            if (Input.GetKey(KeyCode.W))
+                animSpeed = 0.2f;
+            else if (Input.GetKey(KeyCode.S))
+                animSpeed = -0.1f;
+            
+            _animator.SetFloat("speed", animSpeed);
         }
     }
 
